@@ -1,15 +1,25 @@
 <?php
 
 class FormatComponent extends Object {
-  /**
-   * CALLBACK METHODS
-   */
-  
-  
+  public $components = array( 'FormatMask.PhoneNumber' );
   
   /**
    * PUBLIC METHODS
    */
+  
+  public function format( $what, $data, $regex = null ) {
+    switch( strtolower( $what ) ) {
+      case 'phone':
+      case 'phone_number':
+      case 'phonenumber':
+        return $this->PhoneNumber->format( $data, $regex );
+        break;
+      
+      default:
+        throw new Exception( 'Unsupported data type (' . $what . ') sent for formatting.' );
+        break;
+    }
+  }
   
   /**
    * Formats a phone number with an (XXX) XXX-XXX mask.
@@ -20,8 +30,12 @@ class FormatComponent extends Object {
    * @todo    Support user defined masks
    */
   public function phone_number( $digits ) {
-    $digits = preg_replace( '/[^0-9]/', '', $digits );
-    
-    return preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', "($1) $2-$3", $digits );
+    if( is_array( $digits ) ) {
+      # squash it. this is an array coming in from a form.
+      return $this->PhoneNumber->implode( $digits );
+    }
+    else {
+      return $this->PhoneNumber->explode( $digits );
+    }
   }
 }
