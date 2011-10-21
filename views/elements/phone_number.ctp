@@ -6,7 +6,11 @@ $number    = isset( $this->data[$model][$field][2] ) ? $this->data[$model][$fiel
 ?>
 
 <div class="input text phonenumber<?php echo isset( $required ) && $required ? ' required' : '' ?>">
-  <?php echo $this->Form->input( $model . '.phone_number', array( 'name' => 'data[' . $model . '][' . $field . '][]', 'value' => $area_code, 'div' => false, 'label' => isset( $label ) ? $label : 'Phone Number', 'class' => 'area-code', 'maxlength' => 3, 'after' => ' - ' ) ) ?>
-  <?php echo $this->Form->input( $model . '.phone_number', array( 'name' => 'data[' . $model . '][' . $field . '][]', 'value' => $exchange, 'div' => false, 'label' => false, 'class' => 'exchange', 'maxlength' => 3, 'after'     => ' - ' ) ) ?>
-  <?php echo $this->Form->input( $model . '.phone_number', array( 'name' => 'data[' . $model . '][' . $field . '][]', 'value' => $number, 'div' => false, 'label' => false, 'class' => 'number', 'maxlength' => 4 ) ) ?>
+  <?php echo $this->Form->input( $model . '.phone_number', array( 'error' => false, 'name' => 'data[' . $model . '][' . $field . '][]', 'value' => $area_code, 'div' => false, 'label' => isset( $label ) ? $label : 'Phone Number', 'class' => 'area-code', 'maxlength' => 3, 'after' => ' - ' ) ) ?>
+  <?php echo $this->Form->input( $model . '.phone_number', array( 'error' => false, 'name' => 'data[' . $model . '][' . $field . '][]', 'value' => $exchange, 'div' => false, 'label' => false, 'class' => 'exchange', 'maxlength' => 3, 'after'     => ' - ' ) ) ?>
+  <?php echo $this->Form->input( $model . '.phone_number', array( 'error' => false, 'name' => 'data[' . $model . '][' . $field . '][]', 'value' => $number, 'div' => false, 'label' => false, 'class' => 'number', 'maxlength' => 4 ) ) ?>
+  
+  <?php if( $this->Form->isFieldError( $model . '.phone_number' ) ): ?>
+    <?php echo $this->Form->error( $model . '.phone_number' ) ?>
+  <?php endif; ?>
 </div>
