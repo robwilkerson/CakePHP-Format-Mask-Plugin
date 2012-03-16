@@ -60,4 +60,15 @@ class PhoneNumberComponent extends Object {
     
     return preg_replace( $regex, $replace, $digits );
   }
+
+  /**
+   * Strips a phone number of all non-numerics.
+   *
+   * @param   string $number
+   * @return  string
+   * @access  public
+   */
+  public function clean( $number ) {
+    return preg_replace( '/[^0-9]/', '', $number );
+  }
 }
