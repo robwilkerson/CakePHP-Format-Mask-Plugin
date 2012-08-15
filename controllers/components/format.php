@@ -6,6 +6,21 @@ class FormatComponent extends Object {
   /**
    * PUBLIC METHODS
    */
+  public function initialize() {
+
+  }
+  public function startup() {
+
+  }
+  public function beforeRedirect() {
+
+  }
+  public function beforeRender() {
+
+  }
+  public function shutdown() {
+
+  }
   
   public function format( $what, $data, $regex = null ) {
     switch( strtolower( $what ) ) {
